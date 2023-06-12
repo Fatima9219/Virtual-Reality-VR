@@ -1,0 +1,76 @@
+﻿<local:CWindow x:Class="BDGL.NewUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDGL"
+        mc:Ignorable="d"
+        Title="Registration" MinWidth="480" MinHeight="620" Width="480" Height="620" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style x:Key="Agency">
+            <Setter Property="TextElement.FontFamily" Value="./Resources/Fonts/#Agency FB" />
+        </Style>
+        <Style x:Key="PasswordFont">
+            <Setter Property="TextElement.FontFamily" Value="./Resources/Fonts/#Password" />
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource WindowMainPanelStyle}" Background="#2a2e33" BorderBrush="AliceBlue">
+        <Grid>
+            <Grid Height="40" VerticalAlignment="Top" Background="Gray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="14" Text="Registration">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource AncestorType=Window}}" Value="False">
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Button Grid.Column="2" Click="OnMinimizeButtonClick" RenderOptions.EdgeMode="Aliased" Style="{StaticResource TitleBarButtonStyle}">
+                    <Path Width="46" Height="32" Data="M 18,15 H 28" Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                </Button>
+                <Button Grid.Column="4" Click="OnCloseButtonClick" Style="{StaticResource TitleBarButtonStyle}">
+                    <Path Width="46" Height="32" Data="M 18,11 27,20 M 18,20 27,11" Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                </Button>
+            </Grid>
+            <Border Background="LightGray" CornerRadius="10,10,10,10" Margin="45,50,10,10">
+                <Grid x:Name="GridMain" Margin="5,5,5,5" Grid.Row="0">
+                    <Label Content="Firstname" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <TextBox x:Name="firstnameTXTbox" HorizontalAlignment="Left"  Margin="20,40,0,0" VerticalAlignment="Top" Width="120" FontFamily="./Resources/Fonts/#Agency FB" FontSize="14" Foreground="Black" />
+                    <Label Content="Lastname" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <TextBox x:Name="lastnameTXTbox" HorizontalAlignment="Left"  Margin="20,90,0,0" VerticalAlignment="Top" Width="120" FontFamily="./Resources/Fonts/#Agency FB" FontSize="14" Foreground="Black"/>
+                    <Label Content="Username" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <TextBox x:Name="usernameTXTbox" HorizontalAlignment="Left" Margin="20,240,0,0" VerticalAlignment="Top" Width="120" FontFamily="./Resources/Fonts/#Agency FB" FontSize="14" Foreground="Black" />
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <TextBox x:Name="passwordTXTbox" HorizontalAlignment="Left" Margin="20,290,0,0" VerticalAlignment="Top" Width="180" FontFamily="./Resources/Fonts/#Password" MaxLength="20" FontSize="14" Foreground="Black" TextChanged="TextChangedEventHandler"/>
+                    <Label Content="Repeat Password" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <TextBox x:Name="repeatedPasswordTXTbox" HorizontalAlignment="Left" Margin="20,340,0,0" VerticalAlignment="Top" Width="180" FontFamily="./Resources/Fonts/#Password" MaxLength="20" FontSize="14" Foreground="Black"/>
+                    <Label Content="Profile Image" HorizontalAlignment="Left" Margin="272,18,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="16" />
+                    <Border BorderThickness="1" BorderBrush="#abadb3" Width="128" Height="128" Margin="285,40,0,0" VerticalAlignment="Top">
+                        <Image x:Name="userImage" Height="128" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Source="./Resources/Icons/profile_dummy.png"  />
+                    </Border>
+                    <Label x:Name="lengthSign" Content="8-20 Characters" HorizontalAlignment="Left" Margin="220,285,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="14" />
+                    <Label x:Name="aSign" Content="At least one small letter" HorizontalAlignment="Left" Margin="220,305,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="14" />
+                    <Label x:Name="ASign" Content="At least one capital letter" HorizontalAlignment="Left" Margin="220,325,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="14" />
+                    <Label x:Name="SSign" Content="At least one sign" HorizontalAlignment="Left" Margin="220,345,0,0" VerticalAlignment="Top" Style="{DynamicResource Agency}" FontSize="14" />
+                    <Label x:Name="msgLabel" HorizontalAlignment="Left" Margin="20,0,0,65" VerticalAlignment="Bottom" />
+                    <Button Content="Cancel" HorizontalAlignment="Left" Margin="240,490,0,0" VerticalAlignment="Top" Width="80" Height="24" Background="DimGray" Style="{DynamicResource Agency}" FontSize="16" Click="Cancel_Click" />
+                    <Button Content="Register" HorizontalAlignment="Left" Margin="325,490,0,0" VerticalAlignment="Top" Width="80" Height="24" Background="DimGray" Style="{DynamicResource Agency}" FontSize="16" Click="Register_Click" />
+                    <Button x:Name="setProfileImage" Content="add image" VerticalAlignment="Top" Margin="349,169,6,0" Height="Auto"  Background="Transparent" BorderThickness="0" FontSize="12" Click="AddImage_Click"></Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</local:CWindow>
